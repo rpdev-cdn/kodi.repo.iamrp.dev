@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<addons>
+    <addon id="repository.rpdevs" name="RPDevs Add-on Repository" version="1.0.0" provider-name="RPDev">
+        <extension point="xbmc.addon.repository" name="RPDevs Add-on Repository">
+            <dir>
+                <info compressed="false">https://kodi.repo.iamrp.dev/addons.xml</info>
+                <checksum>https://kodi.repo.iamrp.dev/addons.xml.md5</checksum>
+                <datadir zip="true">https://kodi.repo.iamrp.dev/</datadir>
+            </dir>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Official RPDevs Add-on Repository</summary>
+            <description>Official repository for RPDevs first-party streaming resolvers, anime scrapers, and playback utilities for Kodi v21 (Omega) and v22 (Piers).</description>
+            <disclaimer>Official release channel for RPDev first-party software.</disclaimer>
+            <platform>all</platform>
+            <assets>
+                <icon>icon.png</icon>
+            </assets>
+        </extension>
+    </addon>
+    <addon id="script.service.megacloud" name="Megacloud Solver" provider-name="RPDev" version="1.0.0">
+        <requires>
+            <import addon="xbmc.python" version="3.0.0" />
+        </requires>
+        <extension point="xbmc.service" library="service.py" />
+        <extension point="xbmc.python.script" library="default.py">
+            <provides>executable</provides>
+        </extension>
+        <extension point="xbmc.python.module" library="resources/lib/" />
+        <extension point="xbmc.addon.metadata">
+            <platform>all</platform>
+            <license>GPL-2.0-or-later</license>
+            <summary lang="en_GB">Standalone local Megacloud decrypter and resolver HTTP server.</summary>
+            <description lang="en_GB">Exposes an HTTP server on port 4000 to resolve Megacloud/Vidcloud embed URLs natively inside Kodi. Other add-ons can configure their solver URL to use this local service.</description>
+            <assets>
+                <icon>icon.png</icon>
+            </assets>
+        </extension>
+    </addon>
+    <addon id="script.service.flaresolverr" name="FlareSolverr Service" provider-name="RPDev" version="1.0.0">
+        <requires>
+            <import addon="xbmc.python" version="3.0.0" />
+        </requires>
+        <extension point="xbmc.service" library="service.py" />
+        <extension point="xbmc.addon.metadata">
+            <platform>all</platform>
+            <license>MIT</license>
+            <summary lang="en_GB">Local FlareSolverr service for Kodi.</summary>
+            <description lang="en_GB">Runs a headless local FlareSolverr proxy to solve Cloudflare Turnstile and anti-bot challenges natively inside Kodi.</description>
+            <assets>
+                <icon>icon.png</icon>
+            </assets>
+        </extension>
+    </addon>
+    <addon id="metadata.anime.otaku.python" name="Otaku Anime Scraper" version="1.2.2" provider-name="RPDevs">
+        <requires>
+            <import addon="xbmc.python" version="3.0.0" />
+        </requires>
+        <extension point="xbmc.metadata.scraper.tvshows" library="scraper.py">
+            <provides>tvshows episodes</provides>
+        </extension>
+        <extension point="xbmc.metadata.scraper.movies" library="scraper_movies.py">
+            <provides>movies</provides>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Anime Metadata Indexer powered by AniList and Otaku Mappings</summary>
+            <description>A high-performance scraper mapping Eastern Anime databases to native Kodi formats with automated S01E01 filename standardization.</description>
+            <license>GPL-3.0</license>
+            <platform>all</platform>
+        </extension>
+    </addon>
+</addons>

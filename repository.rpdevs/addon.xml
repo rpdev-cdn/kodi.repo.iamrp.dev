@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.rpdevs" name="RPDevs Add-on Repository" version="1.0.0" provider-name="RPDev">
+    <extension point="xbmc.addon.repository" name="RPDevs Add-on Repository">
+        <dir>
+            <info compressed="false">https://kodi.repo.iamrp.dev/addons.xml</info>
+            <checksum>https://kodi.repo.iamrp.dev/addons.xml.md5</checksum>
+            <datadir zip="true">https://kodi.repo.iamrp.dev/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Official RPDevs Add-on Repository</summary>
+        <description>Official repository for RPDevs first-party streaming resolvers, anime scrapers, and playback utilities for Kodi v21 (Omega) and v22 (Piers).</description>
+        <disclaimer>Official release channel for RPDev first-party software.</disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>

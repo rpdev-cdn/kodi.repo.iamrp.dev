@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPDevs Kodi Add-on Repository</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --heading: #f0f6fc;
+            --accent: #58a6ff;
+            --accent-hover: #1f6feb;
+            --badge: #238636;
+            --code-bg: #090d13;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 860px;
+            width: 100%;
+        }
+        header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            color: var(--heading);
+            font-size: 2rem;
+            margin: 0 0 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        p.subtitle {
+            margin: 0;
+            color: #8b949e;
+            font-size: 1.05rem;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card h2 {
+            margin-top: 0;
+            color: var(--heading);
+            font-size: 1.3rem;
+        }
+        .install-box {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: "JetBrains Mono", ui-monospace, monospace;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1rem 0;
+            color: #79c0ff;
+            word-break: break-all;
+        }
+        .btn {
+            background: var(--accent);
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: background 0.15s ease;
+        }
+        .btn:hover {
+            background: var(--accent-hover);
+        }
+        .btn-sm {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            color: var(--heading);
+            font-weight: 600;
+        }
+        .badge {
+            background: var(--badge);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8b949e;
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+        }
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📦 RPDevs Kodi Add-on Repository</h1>
+            <p class="subtitle">Official distribution point for first-party streaming resolvers, anime scrapers, and entertainment utilities.</p>
+        </header>
+
+        <div class="card">
+            <h2>🎯 How to Install in Kodi</h2>
+            <p><strong>Option 1: Add as Kodi File Manager Source (Recommended)</strong></p>
+            <ol>
+                <li>In Kodi, open <strong>Settings</strong> (gear icon) &rarr; <strong>File Manager</strong>.</li>
+                <li>Select <strong>Add source</strong>, click <code>&lt;None&gt;</code>, and enter this exact URL:</li>
+            </ol>
+            <div class="install-box">
+                <span>https://kodi.repo.iamrp.dev/</span>
+            </div>
+            <ol start="3">
+                <li>Name the media source <strong>RPDevs</strong> and click <strong>OK</strong>.</li>
+                <li>Go back to <strong>Settings</strong> &rarr; <strong>Add-ons</strong> &rarr; <strong>Install from zip file</strong>.</li>
+                <li>Select <strong>RPDevs</strong> &rarr; <strong>repository.rpdevs-1.0.0.zip</strong>.</li>
+            </ol>
+            
+            <p style="margin-top: 1.5rem;"><strong>Option 2: Direct Installer ZIP Download</strong></p>
+            <p>Download the repository installer package directly and install via file transfer:</p>
+            <a href="repository.rpdevs-1.0.0.zip" class="btn">⬇️ Download repository.rpdevs-1.0.0.zip</a>
+        </div>
+
+        <div class="card">
+            <h2>📦 First-Party Add-ons Available</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Add-on</th>
+                        <th>Provider</th>
+                        <th>Version</th>
+                        <th>Purpose</th>
+                        <th>Package</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Megacloud Solver</strong></td>
+                        <td>RPDev</td>
+                        <td><span class="badge">v1.0.0</span></td>
+                        <td>Local HTTP decryption server (port 4000) for Megacloud & Vidcloud embeds.</td>
+                        <td><a href="script.service.megacloud/script.service.megacloud-1.0.0.zip" class="btn btn-sm">ZIP</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>FlareSolverr Service</strong></td>
+                        <td>RPDev</td>
+                        <td><span class="badge">v1.0.0</span></td>
+                        <td>Local Cloudflare Turnstile and challenge bypass proxy daemon.</td>
+                        <td><a href="script.service.flaresolverr/script.service.flaresolverr-1.0.0.zip" class="btn btn-sm">ZIP</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Otaku Anime Scraper</strong></td>
+                        <td>RPDevs</td>
+                        <td><span class="badge">v1.2.2</span></td>
+                        <td>Metadata scraper mapping AniList, AniZip, and TMDb with S01E01 renaming.</td>
+                        <td><a href="metadata.anime.otaku.python/metadata.anime.otaku.python-1.2.2.zip" class="btn btn-sm">ZIP</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>RPDevs Add-on Repo</strong></td>
+                        <td>RPDev</td>
+                        <td><span class="badge">v1.0.0</span></td>
+                        <td>Official update channel and manifest index for all RPDev Kodi software.</td>
+                        <td><a href="repository.rpdevs/repository.rpdevs-1.0.0.zip" class="btn btn-sm">ZIP</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>Part of the <a href="https://iamrp.dev">RPDev Sovereign Ecosystem</a> &bull; Documentation at <a href="https://wiki.iamrp.dev">wiki.iamrp.dev</a> &bull; Source on <a href="https://github.com/rpdev-cdn/kodi.repo.iamrp.dev">GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>

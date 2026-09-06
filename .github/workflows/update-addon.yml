@@ -1,0 +1,38 @@
+name: Ingest Addon Release & Update Manifests
+
+on:
+  repository_dispatch:
+    types: [publish-addon]
+  workflow_dispatch:
+    inputs:
+      addon_id:
+        description: "Addon Directory Name"
+        required: true
+      addon_version:
+        description: "Addon Version"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  update-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Regenerate Repository Manifests
+        run: |
+          python3 tools/generate_repo.py
+
+      - name: Commit Updated Manifests
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "ci(repo): update addons.xml and checksum manifests"
+          branch: main
