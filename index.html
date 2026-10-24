@@ -26,7 +26,7 @@
             justify-content: center;
         }
         .container {
-            max-width: 860px;
+            max-width: 900px;
             width: 100%;
         }
         header {
@@ -89,6 +89,24 @@
             padding: 0.35rem 0.75rem;
             font-size: 0.85rem;
         }
+        pre.autoindex {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.2rem;
+            font-family: "JetBrains Mono", ui-monospace, monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        pre.autoindex a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        pre.autoindex a:hover {
+            text-decoration: underline;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -134,7 +152,7 @@
 
         <div class="card">
             <h2>🎯 How to Install in Kodi</h2>
-            <p><strong>Option 1: Add as Kodi File Manager Source (Recommended)</strong></p>
+            <p><strong>Step-by-step Kodi File Manager installation:</strong></p>
             <ol>
                 <li>In Kodi, open <strong>Settings</strong> (gear icon) &rarr; <strong>File Manager</strong>.</li>
                 <li>Select <strong>Add source</strong>, click <code>&lt;None&gt;</code>, and enter this exact URL:</li>
@@ -144,55 +162,71 @@
             </div>
             <ol start="3">
                 <li>Name the media source <strong>RPDevs</strong> and click <strong>OK</strong>.</li>
-                <li>Go back to <strong>Settings</strong> &rarr; <strong>Add-ons</strong> &rarr; <strong>Install from zip file</strong>.</li>
+                <li>Go back to Kodi home &rarr; <strong>Add-ons</strong> &rarr; <strong>Install from zip file</strong> (enable Unknown Sources if prompted).</li>
                 <li>Select <strong>RPDevs</strong> &rarr; <strong>repository.rpdevs-1.0.0.zip</strong>.</li>
             </ol>
             
-            <p style="margin-top: 1.5rem;"><strong>Option 2: Direct Installer ZIP Download</strong></p>
-            <p>Download the repository installer package directly and install via file transfer:</p>
-            <a href="repository.rpdevs-1.0.0.zip" class="btn">⬇️ Download repository.rpdevs-1.0.0.zip</a>
+            <p style="margin-top: 1.5rem;"><strong>Direct Browser Download:</strong></p>
+            <p>Download the installer zip directly to install via USB drive or network share:</p>
+            <a href="repository.rpdevs-1.0.0.zip" class="btn">⬇️ Download Installer (repository.rpdevs-1.0.0.zip)</a>
         </div>
 
         <div class="card">
-            <h2>📦 First-Party Add-ons Available</h2>
+            <h2>📂 Kodi Repository File Index</h2>
+            <p style="font-size: 0.9rem; color: #8b949e; margin-top: -0.5rem;">
+                Standard HTTP autoindex recognized by Kodi's built-in file browser engine (<code>CHTTPDirectory</code>).
+            </p>
+            <pre class="autoindex">
+<a href="repository.rpdevs-1.0.0.zip">repository.rpdevs-1.0.0.zip</a>                            24-Oct-2026 13:43                 591
+<a href="addons.xml">addons.xml</a>                                             24-Oct-2026 13:58                3816
+<a href="addons.xml.md5">addons.xml.md5</a>                                         24-Oct-2026 13:58                  33
+<a href="metadata.anime.otaku.python/">metadata.anime.otaku.python/</a>                           24-Oct-2026 13:57                   -
+<a href="repository.rpdevs/">repository.rpdevs/</a>                                     24-Oct-2026 13:57                   -
+<a href="script.service.flaresolverr/">script.service.flaresolverr/</a>                           24-Oct-2026 13:57                   -
+<a href="script.service.megacloud/">script.service.megacloud/</a>                              24-Oct-2026 13:57                   -
+            </pre>
+        </div>
+
+        <div class="card">
+            <h2>📦 First-Party Add-ons Included in Manifest</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Add-on</th>
                         <th>Provider</th>
                         <th>Version</th>
-                        <th>Purpose</th>
-                        <th>Package</th>
+                        <th>Summary</th>
+                        <th>Folder</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Megacloud Solver</strong></td>
+                        <td><strong>FlareSolverr Service</strong><br><small style="color:#8b949e;">script.service.flaresolverr</small></td>
                         <td>RPDev</td>
                         <td><span class="badge">v1.0.0</span></td>
-                        <td>Local HTTP decryption server (port 4000) for Megacloud & Vidcloud embeds.</td>
-                        <td><a href="script.service.megacloud/script.service.megacloud-1.0.0.zip" class="btn btn-sm">ZIP</a></td>
+                        <td>Local FlareSolverr service for Kodi.</td>
+                        <td><a href="script.service.flaresolverr/" class="btn btn-sm">Browse Folder</a></td>
                     </tr>
                     <tr>
-                        <td><strong>FlareSolverr Service</strong></td>
+                        <td><strong>Megacloud Solver</strong><br><small style="color:#8b949e;">script.service.megacloud</small></td>
                         <td>RPDev</td>
                         <td><span class="badge">v1.0.0</span></td>
-                        <td>Local Cloudflare Turnstile and challenge bypass proxy daemon.</td>
-                        <td><a href="script.service.flaresolverr/script.service.flaresolverr-1.0.0.zip" class="btn btn-sm">ZIP</a></td>
+                        <td>Standalone local Megacloud decrypter and resolver HTTP server.</td>
+                        <td><a href="script.service.megacloud/" class="btn btn-sm">Browse Folder</a></td>
                     </tr>
                     <tr>
-                        <td><strong>Otaku Anime Scraper</strong></td>
+                        <td><strong>Otaku Anime Scraper</strong><br><small style="color:#8b949e;">metadata.anime.otaku.python</small></td>
                         <td>RPDevs</td>
                         <td><span class="badge">v1.2.2</span></td>
-                        <td>Metadata scraper mapping AniList, AniZip, and TMDb with S01E01 renaming.</td>
-                        <td><a href="metadata.anime.otaku.python/metadata.anime.otaku.python-1.2.2.zip" class="btn btn-sm">ZIP</a></td>
+                        <td>Anime Metadata Indexer powered by AniList and Otaku Mappings</td>
+                        <td><a href="metadata.anime.otaku.python/" class="btn btn-sm">Browse Folder</a></td>
                     </tr>
                     <tr>
-                        <td><strong>RPDevs Add-on Repo</strong></td>
+                        <td><strong>RPDevs Add-on Repository</strong><br><small style="color:#8b949e;">repository.rpdevs</small></td>
                         <td>RPDev</td>
                         <td><span class="badge">v1.0.0</span></td>
-                        <td>Official update channel and manifest index for all RPDev Kodi software.</td>
-                        <td><a href="repository.rpdevs/repository.rpdevs-1.0.0.zip" class="btn btn-sm">ZIP</a></td>
+                        <td>Official RPDevs Add-on Repository</td>
+                        <td><a href="repository.rpdevs/" class="btn btn-sm">Browse Folder</a></td>
                     </tr>
                 </tbody>
             </table>

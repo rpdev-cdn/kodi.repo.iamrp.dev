@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
 <addons>
+    <addon id="metadata.anime.otaku.python" name="Otaku Anime Scraper" version="1.2.2" provider-name="RPDevs">
+        <requires>
+            <import addon="xbmc.python" version="3.0.0" />
+        </requires>
+        <extension point="xbmc.metadata.scraper.tvshows" library="scraper.py">
+            <provides>tvshows episodes</provides>
+        </extension>
+        <extension point="xbmc.metadata.scraper.movies" library="scraper_movies.py">
+            <provides>movies</provides>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Anime Metadata Indexer powered by AniList and Otaku Mappings</summary>
+            <description>A high-performance scraper mapping Eastern Anime databases to native Kodi formats with automated S01E01 filename standardization.</description>
+            <license>GPL-3.0</license>
+            <platform>all</platform>
+        </extension>
+    </addon>
     <addon id="repository.rpdevs" name="RPDevs Add-on Repository" version="1.0.0" provider-name="RPDev">
         <extension point="xbmc.addon.repository" name="RPDevs Add-on Repository">
             <dir>
@@ -13,6 +30,21 @@
             <description>Official repository for RPDevs first-party streaming resolvers, anime scrapers, and playback utilities for Kodi v21 (Omega) and v22 (Piers).</description>
             <disclaimer>Official release channel for RPDev first-party software.</disclaimer>
             <platform>all</platform>
+            <assets>
+                <icon>icon.png</icon>
+            </assets>
+        </extension>
+    </addon>
+    <addon id="script.service.flaresolverr" name="FlareSolverr Service" provider-name="RPDev" version="1.0.0">
+        <requires>
+            <import addon="xbmc.python" version="3.0.0" />
+        </requires>
+        <extension point="xbmc.service" library="service.py" />
+        <extension point="xbmc.addon.metadata">
+            <platform>all</platform>
+            <license>MIT</license>
+            <summary lang="en_GB">Local FlareSolverr service for Kodi.</summary>
+            <description lang="en_GB">Runs a headless local FlareSolverr proxy to solve Cloudflare Turnstile and anti-bot challenges natively inside Kodi.</description>
             <assets>
                 <icon>icon.png</icon>
             </assets>
@@ -35,38 +67,6 @@
             <assets>
                 <icon>icon.png</icon>
             </assets>
-        </extension>
-    </addon>
-    <addon id="script.service.flaresolverr" name="FlareSolverr Service" provider-name="RPDev" version="1.0.0">
-        <requires>
-            <import addon="xbmc.python" version="3.0.0" />
-        </requires>
-        <extension point="xbmc.service" library="service.py" />
-        <extension point="xbmc.addon.metadata">
-            <platform>all</platform>
-            <license>MIT</license>
-            <summary lang="en_GB">Local FlareSolverr service for Kodi.</summary>
-            <description lang="en_GB">Runs a headless local FlareSolverr proxy to solve Cloudflare Turnstile and anti-bot challenges natively inside Kodi.</description>
-            <assets>
-                <icon>icon.png</icon>
-            </assets>
-        </extension>
-    </addon>
-    <addon id="metadata.anime.otaku.python" name="Otaku Anime Scraper" version="1.2.2" provider-name="RPDevs">
-        <requires>
-            <import addon="xbmc.python" version="3.0.0" />
-        </requires>
-        <extension point="xbmc.metadata.scraper.tvshows" library="scraper.py">
-            <provides>tvshows episodes</provides>
-        </extension>
-        <extension point="xbmc.metadata.scraper.movies" library="scraper_movies.py">
-            <provides>movies</provides>
-        </extension>
-        <extension point="xbmc.addon.metadata">
-            <summary>Anime Metadata Indexer powered by AniList and Otaku Mappings</summary>
-            <description>A high-performance scraper mapping Eastern Anime databases to native Kodi formats with automated S01E01 filename standardization.</description>
-            <license>GPL-3.0</license>
-            <platform>all</platform>
         </extension>
     </addon>
 </addons>
