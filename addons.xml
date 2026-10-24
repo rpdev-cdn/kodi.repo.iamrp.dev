@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <addons>
-    <addon id="context.otaku.rpdev" version="1.0.35" name="Otaku RPDev - Context Menu" provider-name="RPDevs">
+    <addon id="context.otaku.rpdev" version="1.0.36" name="Otaku RPDev - Context Menu" provider-name="RPDevs">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
         </requires>
@@ -30,6 +30,14 @@
                     <label>Marked as Watched [COLOR blue]WatchList[/COLOR]</label>
                     <visible>String.IsEqual(Window(home).Property(context.otaku.rpdev.markedaswatched),true) + String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/) + [String.IsEqual(ListItem.DBTYPE,episode) | String.IsEqual(ListItem.DBTYPE,movie)] + !Player.HasMedia</visible>
                 </item>
+                <item library="default.py" args="markedasunwatched">
+                    <label>Mark as Unwatched [COLOR blue]WatchList[/COLOR]</label>
+                    <visible>String.IsEqual(Window(home).Property(context.otaku.rpdev.markedaswatched),true) + String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/) + [String.IsEqual(ListItem.DBTYPE,episode) | String.IsEqual(ListItem.DBTYPE,movie)] + !Player.HasMedia</visible>
+                </item>
+                <item library="default.py" args="markpreviouswatched">
+                    <label>Mark Episodes Up To Here as Watched</label>
+                    <visible>String.IsEqual(Window(home).Property(context.otaku.rpdev.markpreviouswatched),true) + String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/) + String.IsEqual(ListItem.DBTYPE,episode) + !Player.HasMedia</visible>
+                </item>
                 <item library="default.py" args="rescrape">
                     <label>Rescrape</label>
                     <visible>String.IsEqual(Window(home).Property(context.otaku.rpdev.rescrape),true) + String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/) + [String.IsEqual(ListItem.DBTYPE,episode)|String.IsEqual(ListItem.DBTYPE,movie)] + !Player.HasMedia</visible>
@@ -53,6 +61,10 @@
                 <item library="default.py" args="fanartselect">
                     <label>Select Fanart</label>
                     <visible>String.IsEqual(Window(home).Property(context.otaku.rpdev.fanartselect),true) + String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/)+[String.IsEqual(ListItem.DBTYPE,tvshow)|String.IsEqual(ListItem.DBTYPE,movie)]</visible>
+                </item>
+                <item library="default.py" args="clearcache">
+                    <label>Clear Addon Cache</label>
+                    <visible>String.IsEqual(Window(home).Property(context.otaku.rpdev.clearcache),true) + String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/)</visible>
                 </item>
             </menu>
         </extension>
@@ -91,13 +103,13 @@
             <platform>all</platform>
         </extension>
     </addon>
-    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDevs" version="5.3.8">
+    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDevs" version="5.3.9">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
             <import addon="script.module.beautifulsoup4" />
             <import addon="script.module.inputstreamhelper" />
             <import addon="script.module.pyqrcode" />
-            <import addon="context.otaku.rpdev" version="1.0.35" />
+            <import addon="context.otaku.rpdev" version="1.0.36" />
         </requires>
         <extension library="default.py" point="xbmc.python.pluginsource">
             <provides>video</provides>
