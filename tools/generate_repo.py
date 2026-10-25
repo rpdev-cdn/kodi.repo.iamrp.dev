@@ -74,6 +74,7 @@ def build_root_index(repo_root, addons_meta, root_autoindex_entries, repo_zip_na
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RPDevs Kodi Add-on Repository</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <style>
         :root {{
             --bg: #0d1117;
@@ -216,8 +217,13 @@ def build_root_index(repo_root, addons_meta, root_autoindex_entries, repo_zip_na
 <body>
     <div class="container">
         <header>
-            <h1>📦 RPDevs Kodi Add-on Repository</h1>
-            <p class="subtitle">Official distribution point for first-party streaming resolvers, anime scrapers, and entertainment utilities.</p>
+            <div style="display: flex; align-items: center; gap: 1.25rem;">
+                <img src="logo.png" alt="RPDevs Logo" style="width: 72px; height: 72px; border-radius: 12px; object-fit: contain;">
+                <div>
+                    <h1 style="margin: 0; font-size: 2rem;">RPDevs Kodi Add-on Repository</h1>
+                    <p class="subtitle" style="margin-top: 0.25rem;">Official distribution point for first-party streaming resolvers, anime scrapers, and entertainment utilities.</p>
+                </div>
+            </div>
         </header>
 
         <div class="card">
