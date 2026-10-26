@@ -159,7 +159,7 @@
             </assets>
         </extension>
     </addon>
-    <addon id="resource.images.animestudio.coloured" name="Anime Studio Icons - Coloured" version="0.0.1" provider-name="RPDevs">
+    <addon id="resource.images.animestudio.coloured" name="Anime Studio Icons - Coloured" version="0.0.2" provider-name="RPDevs">
         <extension point="kodi.resource.images" compile="false" type="studios" />
         <requires>
             <import addon="kodi.resource" version="1.0.0" />
