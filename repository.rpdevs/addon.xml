@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.rpdevs" name="RPDevs Add-on Repository" version="1.0.3" provider-name="RPDev">
+<addon id="repository.rpdevs" name="RPDevs Add-on Repository" version="1.0.4" provider-name="RPDev">
     <extension point="xbmc.addon.repository" name="RPDevs Add-on Repository">
         <dir>
             <info compressed="false">https://kodi.repo.iamrp.dev/addons.xml</info>
