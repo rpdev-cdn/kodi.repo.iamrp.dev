@@ -103,7 +103,7 @@
             <platform>all</platform>
         </extension>
     </addon>
-    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDevs" version="5.5.8">
+    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDevs" version="5.5.9">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
             <import addon="script.module.beautifulsoup4" />
