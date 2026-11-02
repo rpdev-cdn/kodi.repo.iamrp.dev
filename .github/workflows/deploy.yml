@@ -35,4 +35,14 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Wait before retry if initial deploy encountered transient error
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 10
+
+      - name: Retry Deploy to GitHub Pages
+        if: steps.deployment.outcome == 'failure'
+        id: deployment_retry
         uses: actions/deploy-pages@v4
