@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <addons>
-    <addon id="context.otaku.rpdev" version="1.0.43" name="Otaku RPDev - Context Menu" provider-name="RPDevs">
+    <addon id="context.otaku.rpdev" version="1.0.44" name="Otaku RPDev - Context Menu" provider-name="RPDevs">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
         </requires>
@@ -103,7 +103,7 @@
             <platform>all</platform>
         </extension>
     </addon>
-    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDevs" version="5.9.5">
+    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDevs" version="6.0.0">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
             <import addon="script.module.beautifulsoup4" />
