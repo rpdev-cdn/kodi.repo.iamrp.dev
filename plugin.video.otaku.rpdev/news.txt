@@ -1,0 +1,518 @@
+========================
+[B]OTAKU RPDEV v6.1.4[/B]
+UI/UX Polish & Studio Icons
+========================
+
+v6.1.4 Highlights:
+  * Consolidated coloured and white anime studio logos into
+    context.otaku.rpdev with dynamic normalization
+  * Fixed source_select, download_manager, anichart, clear_cache,
+    sort_select, wlf_auth, get_sources, resolver, playing_next, skip_intro,
+    skip_outro, and still_watching layouts and modal close handling
+  * Guarded empty watchlist usernames, episode poster fallbacks, title
+    fallbacks, and ui_review rendering
+  * Hardcoded tag-based release workflow in AGENTS.md
+
+--------------------------------
+[B]OTAKU RPDEV v6.1.3[/B]
+Tooltips, SQLite Cleanup & Web-PDB
+--------------------------------
+
+v6.1.3 Highlights:
+  * Expanded Settings Tooltips: Populated 100% of user-visible settings (344
+    settings) and all 12 categories with clear configuration help tooltips
+  * SQLite Thread & Worker Cleanup: Deterministically closes all thread-local
+    and worker pool SQLite connections on script exit and prunes dead threads
+    to prevent virtual memory exhaustion on 32-bit ARM Android TV devices
+  * Web-PDB Debugger Integration: Added Web-PDB section under Settings ->
+    Maintenance (default port 5566 to avoid ADB 5555) with Post-Mortem,
+    Route-Entry, and on-demand trace modes
+  * Clean Episode Titles Fix: Fixed interface.cleantitles spoiler stripping in
+    episode indexers and non-blocking Download Manager initialization
+
+--------------------------------
+[B]OTAKU RPDEV v6.1.2[/B]
+Pin Next Page & Filter Rows
+--------------------------------
+
+v6.1.2 Highlights:
+  * Pinned "Next Page" rows to the bottom (SpecialSort=bottom) so active Kodi
+    sort methods no longer sort Next Page into the top or middle of watchlists
+    and browse directories
+  * Pinned [Filter List by Text...] / [Clear Filter] controls to the top
+    (SpecialSort=top) across all sort methods and orders
+
+--------------------------------
+[B]OTAKU RPDEV v6.1.1[/B]
+Sorting, Metadata & Simkl Paging
+--------------------------------
+
+v6.1.1 Highlights:
+  * Fixed Sort By dialog showing "Date" twice ("Default" now uses UNSORTED)
+  * Fixed Date & Rating sorts overwriting list item titles with years/ratings
+  * Populated ListItem.setDateTime() so Date sort orders chronologically
+  * Populated episode counts across browsers and watchlists for Episode sort
+  * Fixed OtakuBrowser paged menu compatibility and Simkl Page 2+ resilience
+
+--------------------------------
+[B]OTAKU RPDEV v6.1.0[/B]
+Multipage Sorting & Filtering
+--------------------------------
+
+[ Multipage Pre-Caching • Cross-Page Sorting • Text Filter • Kodi Native Sync ]
+• Background API Pre-Caching: Persistent MultipageWorker in service.py fetches up to 20
+  pages ahead (~1,000 items) into SQLite cache.db with API pacing (>=1.0s AniList, >=1.1s
+  Jikan), paused during video playback or standby.
+• Cross-Page Multi-Dimensional Sorting: Sorts merged multi-page windows by Default, Date,
+  Episode, or Rating (Ascending or Descending) with unrated/missing items placed at the bottom,
+  solving the issue of higher-rated items falling on subsequent pages.
+• Dual Display Modes: Mode 0 ("Paged") provides sliced navigation with inline [Filter List
+  by Text...] and [Clear Filter] actions; Mode 1 ("All Pre-Cached Items") loads all pre-cached
+  entries into Kodi's container for instant C++ native side-blade filtering.
+• Kodi Native Sort Method Synchronization: Registers SORT_METHOD_NONE first in draw_items()
+  to preserve API rankings while exposing native Date, Rating, Episode, and Playcount sorts.
+• Hardened Metadata & VideoInfoTags: setRating handles scalar scores and dictionaries;
+  setEpisode supports episode, episodes, and total_episodes counts.
+
+================================
+         OTAKU RPDEV v6.0.10 - TITLE ISOLATION, CANDIDATE SCORING & FILTERING
+================================
+
+[ Title Isolation • Heuristic Scoring • Derivative Rejection • Autoplay Tiering ]
+• Release Title Isolation & Episode Boundary Detection: Implemented isolate_show_title
+  and clean_title_for_matching in source_utils.py reliably stripping release groups,
+  codecs, resolutions, and file extensions while decoupling episode numbering across
+  hyphenated (- 01), space (Title 01), dot (Title.E01), S##E##, and Part notations.
+• Unified 0–200 Heuristic Candidate Scoring Engine: Replaced naive substring matching
+  with calibrated score_title_candidate prioritizing exact canonical/alias titles (>= 140)
+  and approved release descriptors (>= 110), while penalizing derivative series (<= 40)
+  and enforcing strict word-boundary token equality on ultra-short titles (<= 8 chars).
+• Derivative Title Elimination (Monster vs. Re:Monster): Fixed false-positive collisions
+  for short anime titles like "Monster" matching derivative shows ("Re:Monster", "Monster
+  Musume", "Monster Hunter") or unrelated episode titles containing the query word.
+• 4-Tier Autoplay Relevance Gating: Enhanced sortSources in pages/__init__.py to group
+  sources into 4 relevance tiers before quality/size ordering, ensuring genuine releases
+  rank #1 over higher-resolution derivative releases and protecting SmartPlay autoplay.
+• Scraper Modernization (All 7 Providers): Standardized candidate ranking and cutoffs
+  across HiAnime, GogoAnime, AnimePahe, AniKoto, WatchNixtoons2, AnimeTosho, and Nyaa.
+• 576-Title Comprehensive Dataset & Hermetic Regression Suite: Compiled a deduplicated
+  dataset spanning the Top 100 and Top 50 across 18 genres, verified via a 5-gate
+  hermetic test suite achieving 100% precision and recall across 4,379 candidate variations.
+
+
+================================
+         OTAKU RPDEV v6.0.9 - GOGOANIME (ANITAKU) REACTIVATION & MODERNIZATION
+================================
+
+[ GogoAnime Reactivation • Active Mirror Architecture • Multi-Server Embed Parsing ]
+• GogoAnime / Anitaku Scraper Modernization: Reactivated dormant GogoAnime scraper in
+  _EMBED_MODULES and updated primary canonical domain to active mirror (https://gogoanime.me/)
+  with fallback mirror rotation.
+• Native HTML Search & Zero-soupsieve: Replaced dead ajax.gogocdn.net endpoints with native
+  search.html parsing via Beautiful Soup .find()/.find_all(), with automatic MALSync fallback.
+• Multi-Server Embed Normalization: Added canonical normalization mapping modern GogoAnime
+  server classes (anime -> vidcdn, streamwish, mp4upload, doodstream, filemoon) to ensure
+  all enabled embed servers are collected without premature break.
+• Category Page Fallback: Added automatic fallback to #episode-items on category pages for
+  specials, movies, and non-standard episode URL schemes.
+• Sub & Dub Preference Precision: Integrated Unicode quote normalization, alias scoring,
+  and user source setting (general.source) filtering to isolate SUB vs DUB streams cleanly.
+• Schema & Settings Verification: Enabled provider.gogo and provider.gogoalt in settings.xml
+  with updated strings in strings.po ("GogoAnime (Anitaku)").
+
+
+================================
+         OTAKU RPDEV v6.0.8 - UNICODE QUOTE NORMALIZATION & SCRAPER MATCHING
+================================
+
+[ Unicode Quote Normalization • HiAnime MegaCloud Matching • Title Disambiguation ]
+• Unicode Quote & Punctuation Normalization: Added robust normalization in HiAnime
+  (_normalize_title_text, _score_candidate, _search_keywords) and AnimePahe (_normalize_title)
+  converting curly/Unicode quotes (’ ‘ ‚ ‛ ´ ′ ” “ „ ‟) to standard ASCII (' ") and em/en
+  dashes (— –) to standard hyphens (-).
+• HiAnime Accurate Series Resolution: Eliminates string matching failures on titles with
+  apostrophes (e.g., "Frieren: Beyond Journey’s End"). Ensures the main series (ID 481)
+  scores highest (330 vs 10) instead of falling back to mini-anime or spinoffs, reliably
+  returning HD-1 (MegaCloud) stream candidates.
+• Search Keyword Diversity: HiAnime query generator now dispatches both raw metadata titles
+  and normalized ASCII variants to maximize scraper index hit rates.
+
+
+================================
+         OTAKU RPDEV v6.0.7 - FLARESOLVERR DIRECT HTML & ZERO-SOUPSIEVE
+================================
+
+[ Direct HTML (JA3/JA4 Bypass) • Zero-Soupsieve Gate • WCO 2026 Protocol • WAF Fail-Fast ]
+• Zero-soupsieve Beautiful Soup Parsing: Converted all CSS selector calls across scrapers
+  (HiAnime, Nyaa, GogoAnime, AnimeKAI) to native .find()/.find_all(), eliminating runtime
+  NotImplementedError inside Kodi. Added permanent AST lint check forbidding .select().
+• FlareSolverr Direct HTML Return (JA3/JA4 Bypass): Upgraded cfcookie/ddgcookie to return
+  solved HTML directly from headless Chromium (returnOnlyCookies: False), completely
+  bypassing Cloudflare JA3/JA4 TLS fingerprint mismatch on Python urllib. Added support for
+  modern DDoS-Guard tokens (__ddg1_ to __ddg10_).
+• Hard WAF Fast-Fail & Turnstile Cooldown: Added immediate <400ms skip for unsolvable
+  Cloudflare IP bans (Attention Required! | Cloudflare) and 600s negative caching on
+  unsolvable interactive hosts.
+• WatchNixtoons2 2026 Protocol & Memory Protection: Implemented complete 2026 WCO player
+  handshake (PHPSESSID -> pre-init.js?v2 -> ad-verify -> 5.2s waitForAbort -> video-js-old.php)
+  skipping vhs paywall iframes. Added Range: bytes=0-0 to redirect resolution to avoid
+  buffering full video files into memory. Sequentialized SUB then DUB to prevent IP session
+  invalidation (HTTP 503 Servers Busy).
+• Lazy Stream Prefetch & Connectivity Probes: Stream verification in Resolver probes CDN
+  streams directly first, speeding up stream resolution by 37x (96ms vs 3575ms). Upgraded
+  is_internet_available to probe TCP 443 across HTTPS CDNs, preventing false offline triggers
+  on NextDNS/firewalled networks.
+• Airing Calendar & Lifecycle: Set isFolder=False for airing_calendar and ensured clean
+  del dlg disposal inside try...finally after modal display.
+
+
+================================
+         OTAKU RPDEV v6.0.6 - AST GUARDRAIL GATES & DEFENSIVE DECODING
+================================
+
+[ Static CI AST Gates • Universal Safe JSON • Immediate Teardown Abort Exits ]
+• Universal Defensive JSON Decoding: Migrated all 23 residual direct json.loads() call
+  sites across embed extractors (ok.ru, VOE, GoLoad, MegaPlay, MegaCloud), scrapers
+  (AnimeKAI, GogoAnime, HiAnime, PirateBay), AniList, ffprobe, and SQLite deserializers
+  to control.loads_json() / control.safe_json(), preventing crashes on malformed HTML/CF
+  challenge payloads.
+• Immediate Shutdown & Startup Abort Responsiveness: Eliminated all unchecked standalone
+  waitForAbort() calls in WatchlistPlayer.keepAlive(), TMDbHelper playback notifications,
+  and Premiumize OAuth slow_down polling so Kodi exits immediately without firing
+  post-abort notifications or loops.
+• Automated AGENTS.md Static AST Lint Gates: Expanded test_ast_integrity and WindowXML
+  static AST suites (578 passing tests) to block unchecked waitForAbort() calls, direct
+  json.loads() outside control.py, mutable defaults, legacy super(), raw print(), and
+  WindowXML double event dispatch.
+
+
+================================
+              OTAKU RPDEV v6.0.5 - ARCHITECTURE & SUBSYSTEM HARDENING
+================================
+
+[ Memory Safeguards • WindowXML Single Dispatch • Scraper & Debrid Resilience ]
+• 64KB Window Property Guard & SQLite Review Cache: Enforced a strict 64KB ceiling on
+  Kodi C++ window properties to prevent low-RAM heap fragmentation, and offloaded
+  multi-entry user review caches to SQLite WAL cache.db.
+• WindowXML Single Event Dispatch & Focus Stability: Eliminated duplicate Action ID 7/100
+  routing from onAction() across 11 dialogs and implemented in-place ListItem updates
+  in DownloadManager so list focus is never evicted.
+• Native Kodi 22 Demuxer Chapter Priority: Prioritized direct Player.GetChapters JSON-RPC
+  queries on playback start ahead of external AniSkip waits, decoupled from ffprobe.
+• Scraper Genericity & Mirror Retention: Dynamized embed API origins in WatchNixtoons2
+  and retained all candidate stream mirrors in GogoAnime for multi-server failover.
+• Debrid Transport, 429 Jitter & Proactive OAuth: Added float timeout precision, jittered
+  429 Retry-After backoff with immediate abort exit across all debrid clients, proactive
+  300s OAuth token refresh checks, and SQLite read-only URI pooling for mappings.db.
+
+
+================================
+                    OTAKU RPDEV v6.0.4 - UPSTREAM PARITY & ACCURACY
+================================
+
+[ TMDbHelper Integration • Season & Episode Mapping • Project Governance ]
+• TMDbHelper Season/Episode Mapping Match: Integrated upstream PR #500 innovation.
+  When playing episodes via TMDbHelper, Otaku now evaluates TMDb and TVDb season
+  layouts against mappings.db before falling back to fuzzy title matching, correctly
+  resolving multi-part seasons and absolute-numbered anime (e.g. One Piece, Naruto).
+• Workspace Governance & Rules Distribution: Packaged AGENTS.md directly in the
+  repository to enforce non-degradation invariants and domain-agnostic scraper design.
+
+
+================================
+                    OTAKU RPDEV v6.0.3 - DYNAMIC EMBED PROVIDERS
+================================
+
+[ Scraper Resilience • Generic Domain Decoding • Multi-Host Failover ]
+• Generalized Server Hash Decoding: Removed hardcoded restriction to 'megaplay.buzz' in
+  HiAnime's server hash decoder. All valid streaming hosts returned in base64 hashes
+  (such as zokoanime.video and future providers) are now parsed and evaluated.
+• Multi-Candidate Server Failover: Candidate servers for both SUB and DUB streams are now
+  evaluated in priority order. If one host fails or is unreachable, Otaku automatically
+  falls back to alternate servers without returning empty source sets.
+• Dynamic Embed API Extraction: Updated the embed extractor to dynamically target the
+  origin host of the embed URL for player source endpoints rather than forcing megaplay.buzz.
+
+
+================================
+                    OTAKU RPDEV v6.0.2 - CODE HARDENING & INTEGRITY
+================================
+
+[ Architecture Hardening • Single Source of Truth • Schema Integrity ]
+• _SettingsProxy Defensive Getters: Hardened all SettingsProxy getter methods (getInt,
+  getBool, getNumber, getString, etc.) with defensive exception handling and defaults.
+• Top-Level Module Import Fallback: Added resilient fallback defaults for xbmcaddon.Addon()
+  at control.py module initialization, preventing transient startup failures during updates.
+• Dynamic Embed Skip-Time Registry: Unified EMBED_SKIP_PREFIXES as a single source of
+  truth derived from active _EMBED_MODULES, eliminating hardcoded provider drift.
+• Debrid Diagnostics Mapping: Corrected debrid settings mapping in Tools Diagnostics to
+  query {service}.enabled instead of non-existent provider.{service} keys.
+• Enhanced AST Schema Verification: Expanded test suite to audit all setting getters/setters
+  and added explicit dynamic schema verification for skip times, debrid, and watchlists.
+
+
+================================
+                    OTAKU RPDEV v6.0.1 - EMERGENCY HOTFIX
+================================
+
+[ Hotfix: Scraper Initialization Freeze & Kodi 22 Setting Hardening ]
+• Scraper Initialization Fix: Removed legacy defunct 'aniwave' prefix from the embed
+  skip time initialization loop in pages/__init__.py and player.py.
+• Kodi 22 Setting Setter Resilience: Hardened control.py setters (setInt, setBool,
+  setString, setNumber) to gracefully handle undeclared setting exceptions, preventing
+  background scraper worker thread crashes and UI lockups on Kodi 22.
+
+
+================================
+                    OTAKU RPDEV v6.0.0 - MAJOR MILESTONE RELEASE
+================================
+
+[ Milestone v6.0.0 • Complete Codebase Maturity • Performance & Resilience ]
+
+Welcome to Otaku RPDev v6.0.0! This landmark milestone represents the culmination
+of comprehensive subsystem hardening, universal customization, and architectural
+modernization since forking from Goldenfreddy0703/Otaku v5.3.4 (with over 1,170 file
+changes and +39,000 additions cataloged in the root CHANGEREPORT.md).
+
+--------------------------------
+New in v6.0.0: Architecture Hardening & Code Maturity
+--------------------------------
+• Responsive Abort Loops in Playback: Replaced synchronous sleeps in playback
+  monitoring and skip-intro countdowns with non-blocking waitForAbort() loops.
+  Kodi shutdown, stream transitions, and manual aborts now respond instantaneously
+  with zero worker hangs or delayed process terminations.
+• Defunct Scraper Pruning: Fully stripped out dead scrapers (AniWave and AniMixPlay)
+  and their legacy settings from settings.xml and active source registries, saving
+  valuable worker threads, memory, and network bandwidth on defunct domains.
+• Universal Menu Customization Across All Categories: Completely revamped the
+  Menu Order & Customization interface into a native WindowXML dialog (menu_order.xml).
+  Provides Move Up, Move Down, Move to Top, Move to Bottom, Toggle Visibility, and
+  a single-click 'Toggle All On / Off' button across all 24 category menus (Main Menu,
+  Movies, TV Shows, TV Shorts, Specials, OVAs, ONAs, Music Videos for Main, Sub,
+  and Genre menus) with standardized "Main Menu Items" naming.
+• Strict 30-Second Scraper Timeout: Capped scraping timeouts add-on-wide to a strict
+  30-second ceiling across settings and concurrency coordinators, ensuring that slow
+  or unresponsive remote providers never freeze the scraping window.
+• Read-Only SQLite URI Connections: Enforced mode=ro URI mode on static databases
+  (info.db and mappings.db lookups) with isolated connection cache keys, guaranteeing
+  zero database lock contention between UI listings, scrapers, and sync threads.
+• Scraper Health Decoupled from Cloud CI: Scraper diagnostics are optimized for
+  local and residential/VPN execution, bypassing Cloudflare datacenter IP blocks,
+  while automated CI continues deterministic testing against 512+ offline tests.
+• Zero-Wait Stream Pre-Resolution & "Still Watching?" Binge Safeguards: Streamlined
+  background next-episode resolution (70% playback progress) and binge-watching
+  protections preventing unwatched playlist runaway.
+
+
+================================
+                    OTAKU RPDEV v5.8.1 - WHAT'S NEW & MILESTONES
+================================
+
+[ Changelog Reliability & Comprehensive Settings Engine Optimization ]
+
+Otaku RPDev v5.8.1 resolves the changelog update trigger and comprehensively
+wires and enforces all settings across Scraping, Cache, Playback, and Network:
+
+--------------------------------
+New in v5.8.1: Changelog Reliability & Comprehensive Settings Wiring
+--------------------------------
+• Reliable Changelog Display: Fixed root route detection and decoupled UI
+  version tracking from background service migrations, ensuring the changelog
+  reliably displays whenever the addon updates.
+• First-Time Setup Safeguard: Ensured fresh installs preserve the 'Show changelog
+  every update' setting enabled (Yes) for future releases.
+• Scraping Concurrency Workers: Scraper worker pool now dynamically obeys the
+  configured concurrency slider (scraper.concurrency.workers).
+• Early Torrent Termination: Added support for terminating scraping early when
+  torrent sources are detected (general.terminate.ontorrent).
+• Database & Cache TTL Controls: Cache durations across scrapers, metadata, and
+  airing calendar dynamically honor user-configured TTL values.
+• SQLite Engine PRAGMAs: Full user configuration for synchronous modes, RAM
+  cache size, MMAP limits, and in-memory temp tables.
+• SmartPlay Quality Continuity: Auto-play next episode prioritizes torrent and
+  hoster sources matching the previously selected resolution and release group.
+• Source Badges & Widget Delays: Respects colored badge suppression in source
+  selection and configurable widget load delays to prevent API rate limiting.
+
+================================
+                    OTAKU RPDEV v5.7.2 - WHAT'S NEW & MILESTONES
+================================
+
+[ Universal Watchlist & Debrid Auth Hardening • Zero-Failure Stability ]
+
+Otaku RPDev v5.7.2 delivers comprehensive hardening across all 4 watchlist flavors
+and 7 Debrid & Cloud providers, guaranteeing flawless setup and authentication:
+
+--------------------------------
+New in v5.7.2: Universal Watchlist & Debrid Auth Resilience
+--------------------------------
+• Full Watchlist Flavor Hardening: Validated and hardened AniList, MyAnimeList,
+  Kitsu, and Simkl with defensive parameter handling, empty-credential guards,
+  and graceful fallback for all API response types.
+• Universal QR Code Protection: Wrapped pyqrcode across all authentication modals
+  with automatic fallbacks so that missing graphics libraries or sandbox
+  restrictions never prevent users from seeing authorization URLs and codes.
+• Responsive Polling & Fast Cancellation: Modernized polling loops across
+  Real-Debrid, Premiumize, AllDebrid, Debrid-Link, and TorBox with 1-second ticks
+  and abort checks for instantaneous cancellation response.
+• Dialog Lifecycle Fix: Resolved Debrid-Link frozen dialog bug where the progress
+  modal was never closed on completion or timeout.
+• Automatic Provider Enablement: Authorizing any Debrid provider or Watchlist now
+  immediately activates that service in Kodi settings without requiring manual toggling.
+
+
+================================
+                    OTAKU RPDEV v5.7.0 - WHAT'S NEW & MILESTONES
+================================
+
+[ Kodi 22 (Piers RC) Ready • Universal Backwards Compatibility • Milestone v5.7.0 ]
+
+Welcome to Otaku RPDev v5.7.0! This milestone release introduces advanced playback
+and architecture modernizations inspired by Umbrella: zero-wait direct stream pre-
+resolution, an interactive "Still Watching?" binge safeguard, concurrency-safe request
+coalescing, provider-specific color palette branding, and an orphaned settings pruner.
+
+--------------------------------
+New in v5.7.0: Umbrella Architectural Adoptions & Playback Modernization
+--------------------------------
+• Zero-Wait Pre-Resolved Stream Handoff: During episode playback at 70% progress,
+  Otaku pre-scrapes the next episode and silently resolves the direct stream URL in the
+  background (resolve_silent). When the current episode finishes, playback of the next
+  episode starts instantly with 0 ms resolver lag and no dialog popups.
+• "Still Watching?" Binge Safeguard: Interactive StillWatchingXML countdown prompt
+  triggers after consecutive autoplayed episodes (default: 3 episodes, 30s timeout).
+  If unattended, it clears the playlist and pauses playback, protecting Debrid quotas
+  and preventing false watch history updates on AniList/MAL.
+• Concurrency-Safe Request Coalescing (get_coalesced): Eliminates SQLite database lock
+  collisions and redundant remote API requests when multiple Python invokers execute
+  simultaneously using micro-coordination SQLite locking with BEGIN IMMEDIATE.
+• Provider-Specific Color Palette Branding: Source selection lists now display vibrant
+  brand colors for each Debrid provider (Premiumize Purple, Real-Debrid Blue, TorBox
+  Orange, AllDebrid Green) and web embed sources for effortless scanning.
+• Orphaned Settings Pruner (clean_settings): Automatically sanitizes userdata
+  settings.xml upon version upgrades and provides a manual action button under
+  Settings -> Cache & Database to remove deprecated tags and eliminate Kodi 22 C++ warnings.
+
+================================
+                    OTAKU RPDEV v5.6.4 - WHAT'S NEW & MILESTONES
+================================
+
+[ Kodi 22 (Piers RC) Ready • Universal Backwards Compatibility • Milestone v5.6.3 ]
+
+Welcome to Otaku RPDev v5.6.3! This release delivers scraper resilience fixes across
+torrent and embed providers, adds dictionary yield counting and provider expansion
+to the automated health monitor, and certifies 263 unit tests.
+
+--------------------------------
+New in v5.6.3: Scraper Resilience & Multi-Provider Health Monitor
+--------------------------------
+• Scraper Resilience Hardening: Guarded AnimeTosho and WatchNixtoons2 against
+  NoneType exceptions when shows or episodes lack pre-cached metadata in local SQLite.
+• Automated Scraper Health Monitor: Expanded check_scraper_health.py to monitor all
+  10 providers (Nyaa, AnimeTosho, HiAnime, AnimePahe, AniKoto, AnimeKai, Gogoanime,
+  Torrentio, NekoBT, WatchNixtoons2) with accurate dict/list yield metrics.
+• Verified Embed & Debrid Streams: Validated AniKoto 1080p master HLS direct streams
+  with multi-language subtitles and intro/outro skips, alongside Premiumize debrid
+  torrent cache. 263/263 unit tests passing.
+
+--------------------------------
+New in v5.6.2: Scraper Hardening & Kodi 22 Feature Certification
+--------------------------------
+• Nyaa Batch Search Hardening: Guarded show metadata extraction during batch
+  and complete series searches against NoneType when shows are queried directly.
+• Certified 38/38 Subsystem Audits on Kodi 22: Passed 100% of route dispatches,
+  strict settings queries, SQLite WAL checks, and live Premiumize debrid stream
+  resolution (58 torrents / 39 cached streams).
+
+--------------------------------
+New in v5.6.1: Premiumize OAuth 2.0 & Device Enrollment
+--------------------------------
+• Progress Dialog Resilience: Guarded pyqrcode import and render routines so
+  missing modules or initial data directory states never prevent the authorization
+  progress dialog from rendering.
+• Instant QR Code Enrollment: Embedded user_code into the generated QR code URL
+  (https://www.premiumize.me/device?user_code=xxxx-xxxx), letting mobile devices
+  instantly navigate and confirm approval without manually typing the code.
+• Resilient Polling & HTTP 400 Handling: Fixed client response evaluation during
+  token polling so HTTP 400 authorization_pending, slow_down (+5s backoff), and
+  access_denied payloads properly update the countdown progress bar.
+• Account Expiration Hardening: Handled null and non-numeric premium_until
+  timestamps safely to avoid comparison errors during account status checks.
+
+--------------------------------
+Original Project Credit & Heartfelt Acknowledgement
+--------------------------------
+Otaku RPDev is built upon the incredible foundational work of Goldenfreddy0703
+and the original Team Otaku developers:
+  • Original Project: https://github.com/Goldenfreddy0703/Otaku
+  • Original Authors: Goldenfreddy0703, Team Otaku, and community contributors.
+We extend our deepest appreciation to Goldenfreddy0703 for creating the original
+Otaku add-on and architecture. All original licenses and contributor credits are
+proudly preserved.
+
+--------------------------------
+Major Highlights & Upgrades in v5.6.0
+--------------------------------
+
+1. Zero-Wait Fast-Path Background Pre-Caching
+   • Background pre-scraping at 70% playback progress now persists whole-episode
+     sorted sources with a 4-hour TTL directly into SQLite database cache.
+   • When starting the next episode (or auto-playing via SmartPlay), MetaBrowser
+     uses Fast-Path 2 to return the pre-cached stream immediately in 0.001s.
+   • Completely eliminates the scraping dialog (get_sources.xml) and stops
+     45-second UI freezes caused by unresponsive or failing scrapers.
+
+2. SmartPlay Web Embed Continuity (smartplay.prefer_same_embed)
+   • Hands-free binge watching on web embed providers (Anikoto/MegaPlay,
+     AnimePahe, HiAnime, etc.)!
+   • When you select an embed source for Episode 1, SmartPlay preserves your
+     chosen provider and audio language (Sub vs. Dub) across subsequent episodes.
+   • resolver.reorder_sources and pages.sortSources prioritize the matching
+     provider at index 0 and hand off directly to playback without prompting.
+
+3. Kodi 22 (Piers RC) Strict Settings Typing & Zero C++ Exceptions
+   • Kodi 22 strictly enforces declared setting types, throwing fatal C++
+     exceptions if an add-on touches an undeclared setting.
+   • All internal settings (dub.etag, mappings.etag, mappings.last_modified,
+     verify_ssl, last_played_source, last_watched_series, prefer_same_embed)
+     are now formally registered and typed in resources/settings.xml.
+   • Zero C++ setting exceptions across Kodi 20, Kodi 21, and Kodi 22 RC!
+
+4. SWIG Director Memory Leak Elimination
+   • Addressed Python invoker C++ SWIG wrapper leaks during playback transitions.
+   • WindowXMLDialog instances (SourceSelect, Resolver, SkipIntro, PlayingNext)
+     are explicitly tracked, closed, and unbound to prevent SwigDirector warnings
+     and memory accumulation during extended viewing sessions.
+
+5. Anikoto Scraper Hardening
+   • Fixed an issue where Anikoto aborted early if show records were not yet
+     indexed in the database.
+   • Added multi-tier fallbacks (shows_meta, episodes, synthetic IDs) so the
+     MegaPlay API endpoint is always queried.
+   • Scraper diagnostics elevated to info level for transparent troubleshooting.
+
+6. Upcoming Dub Release Date Badges (v5.5.20)
+   • For anime with upcoming dub releases, the exact dub broadcast date is
+     displayed right-aligned in the episode row (Label2) next to the watch icon.
+   • AnimeSchedule scraper parses ISO timezones and converts to your local time.
+
+7. Auto-Skip Chapter Resolution & Heuristics (v5.5.19)
+   • Evaluates embedded MKV/MP4 chapters with OP/ED confidence detection and a
+     90-second duration heuristic, preventing false skips during story prologues.
+
+8. Debrid Cache Availability Integrity (v5.5.21)
+   • Prevents false-negative cache poisoning by storing only confirmed positive
+     hashes in SQLite debrid_cache and generating fresh DMM request secrets.
+
+9. Multi-Option Cache & Maintenance System (v5.5.1)
+   • Context Menu "Clear Addon Cache" launches an interactive modal window.
+   • Selective Provider Cache clearing flushes torrents, embeds, season packs,
+     and debrid hashes without touching your watchlist or show metadata.
+
+10. 252 Automated CI Tests Harness (100% Error Catching)
+   • Comprehensive automated test suite in CI testing every subsystem: mock Kodi
+     environment, debrid resolvers, scrapers, indexers, windows, and lifecycles.
+
+================================
+Thank you for using Otaku RPDev! Enjoy seamless, zero-wait living-room streaming.
+================================
