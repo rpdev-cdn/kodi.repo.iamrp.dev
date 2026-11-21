@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <addons>
-    <addon id="context.otaku.rpdev" version="1.0.45" name="Otaku RPDev - Context Menu" provider-name="RPDev">
+    <addon id="context.otaku.rpdev" version="1.0.46" name="Otaku RPDev - Context Menu" provider-name="RPDev">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
         </requires>
@@ -66,6 +66,14 @@
                     <label>Clear Addon Cache</label>
                     <visible>String.IsEqual(Window(home).Property(context.otaku.rpdev.clearcache),true) + String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/)</visible>
                 </item>
+                <item library="default.py" args="seriesprofile">
+                    <label>Series Playback Profile</label>
+                    <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/) + [String.IsEqual(ListItem.DBTYPE,tvshow)|String.IsEqual(ListItem.DBTYPE,episode)]</visible>
+                </item>
+                <item library="default.py" args="manualsubtitles">
+                    <label>Manual Subtitle Search</label>
+                    <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/)</visible>
+                </item>
             </menu>
         </extension>
         <extension point="xbmc.addon.metadata">
@@ -103,7 +111,7 @@
             <platform>all</platform>
         </extension>
     </addon>
-    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDev" version="6.2.19">
+    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDev" version="6.3.0">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
             <import addon="script.module.beautifulsoup4" />
@@ -111,8 +119,8 @@
             <import addon="script.module.web-pdb" optional="true" />
             <import addon="script.module.inputstreamhelper" />
             <import addon="script.module.pyqrcode" />
-            <import addon="context.otaku.rpdev" version="1.0.45" />
-            <import addon="service.subtitles.otaku.rpdev" version="1.0.2" />
+            <import addon="context.otaku.rpdev" version="1.0.46" />
+            <import addon="service.subtitles.otaku.rpdev" version="1.0.3" />
         </requires>
         <extension library="default.py" point="xbmc.python.pluginsource">
             <provides>video</provides>
@@ -224,7 +232,7 @@
             </assets>
         </extension>
     </addon>
-    <addon id="service.subtitles.otaku.rpdev" version="1.0.2" name="Otaku RPDev Subtitles" provider-name="RPDev">
+    <addon id="service.subtitles.otaku.rpdev" version="1.0.3" name="Otaku RPDev Subtitles" provider-name="RPDev">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
         </requires>
