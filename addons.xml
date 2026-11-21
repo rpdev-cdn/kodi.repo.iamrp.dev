@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <addons>
-    <addon id="context.otaku.rpdev" version="1.0.46" name="Otaku RPDev - Context Menu" provider-name="RPDev">
+    <addon id="context.otaku.rpdev" version="1.0.47" name="Otaku RPDev - Context Menu" provider-name="RPDev">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
         </requires>
@@ -74,6 +74,10 @@
                     <label>Manual Subtitle Search</label>
                     <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/)</visible>
                 </item>
+                <item library="default.py" args="inspectmappings">
+                    <label>Inspect ID Mappings</label>
+                    <visible>String.IsEqual(Window(home).Property(context.otaku.rpdev.inspectmappings),true) + String.StartsWith(ListItem.Path,plugin://plugin.video.otaku.rpdev/) + [String.IsEqual(ListItem.DBTYPE,tvshow)|String.IsEqual(ListItem.DBTYPE,movie)|String.IsEqual(ListItem.DBTYPE,episode)]</visible>
+                </item>
             </menu>
         </extension>
         <extension point="xbmc.addon.metadata">
@@ -111,7 +115,7 @@
             <platform>all</platform>
         </extension>
     </addon>
-    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDev" version="6.3.1">
+    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDev" version="6.3.2">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
             <import addon="script.module.beautifulsoup4" />
@@ -119,7 +123,7 @@
             <import addon="script.module.web-pdb" optional="true" />
             <import addon="script.module.inputstreamhelper" />
             <import addon="script.module.pyqrcode" />
-            <import addon="context.otaku.rpdev" version="1.0.46" />
+            <import addon="context.otaku.rpdev" version="1.0.47" />
             <import addon="service.subtitles.otaku.rpdev" version="1.0.3" />
         </requires>
         <extension library="default.py" point="xbmc.python.pluginsource">
