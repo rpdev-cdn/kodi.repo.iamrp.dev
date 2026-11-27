@@ -115,7 +115,7 @@
             <platform>all</platform>
         </extension>
     </addon>
-    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDev" version="6.8.0">
+    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDev" version="6.9.0">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
             <import addon="script.module.beautifulsoup4" />
@@ -124,8 +124,8 @@
             <import addon="script.module.inputstreamhelper" />
             <import addon="script.module.pyqrcode" />
             <import addon="context.otaku.rpdev" version="1.0.50" />
-            <import addon="service.subtitles.otaku.rpdev" version="1.0.3" />
-            <import addon="service.otaku.rpdev" version="1.1.0" />
+            <import addon="service.subtitles.otaku.rpdev" version="1.1.0" />
+            <import addon="service.otaku.rpdev" version="1.2.0" />
         </requires>
         <extension library="default.py" point="xbmc.python.pluginsource">
             <provides>video</provides>
@@ -236,7 +236,7 @@
             </assets>
         </extension>
     </addon>
-    <addon id="service.otaku.rpdev" version="1.1.0" name="Otaku RPDev Background Service" provider-name="RPDev">
+    <addon id="service.otaku.rpdev" version="1.2.0" name="Otaku RPDev Background Service" provider-name="RPDev">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
             <import addon="script.module.beautifulsoup4" />
@@ -261,14 +261,14 @@
             </assets>
         </extension>
     </addon>
-    <addon id="service.subtitles.otaku.rpdev" version="1.0.3" name="Otaku RPDev Subtitles" provider-name="RPDev">
+    <addon id="service.subtitles.otaku.rpdev" version="1.1.0" name="Otaku RPDev Subtitles" provider-name="RPDev">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
         </requires>
         <extension point="xbmc.subtitle.module" library="service.py" />
         <extension point="xbmc.addon.metadata">
             <summary lang="en">Otaku RPDev Multi-Provider Subtitle Service (Auto &amp; Manual Search)</summary>
-            <description lang="en">Integrates Otaku RPDev's built-in online subtitle providers (OpenSubtitles, SubDL, SubSource, Podnapisi, BSPlayer, Addic7ed) into Kodi's OSD Subtitle Settings &gt; Download Subtitle dialog with automatic match indicators and full manual search. Configure providers and credentials under Settings - Otaku RPDev &gt; Subtitles.</description>
+            <description lang="en">Integrates Otaku RPDev's built-in 8-provider online subtitle engine (OpenSubtitles, SubDL, SubSource, Podnadpisi, BSPlayer, Addic7ed, Jimaku, AnimeTosho) into Kodi's OSD Subtitle Settings &gt; Download Subtitle dialog with automatic match indicators, dedicated provider/engine settings, and full manual search.</description>
             <platform>all</platform>
             <reuselanguageinvoker>false</reuselanguageinvoker>
             <license>GPL-3.0</license>
