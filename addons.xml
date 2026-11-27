@@ -115,7 +115,7 @@
             <platform>all</platform>
         </extension>
     </addon>
-    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDev" version="6.6.4">
+    <addon id="plugin.video.otaku.rpdev" name="Otaku RPDev" provider-name="RPDev" version="6.7.0">
         <requires>
             <import addon="xbmc.python" version="3.0.1" />
             <import addon="script.module.beautifulsoup4" />
@@ -125,11 +125,11 @@
             <import addon="script.module.pyqrcode" />
             <import addon="context.otaku.rpdev" version="1.0.50" />
             <import addon="service.subtitles.otaku.rpdev" version="1.0.3" />
+            <import addon="service.otaku.rpdev" version="1.0.0" />
         </requires>
         <extension library="default.py" point="xbmc.python.pluginsource">
             <provides>video</provides>
         </extension>
-        <extension point="xbmc.service" library="service.py" />
         <extension point="xbmc.addon.metadata">
             <reuselanguageinvoker>false</reuselanguageinvoker>
             <summary lang="en">Hardened, Kodi 22 RC ready anime streaming add-on for Kodi (Nexus, Omega, Piers)</summary>
@@ -233,6 +233,31 @@
             <description lang="en_GB">Exposes an HTTP server on port 4000 to resolve Megacloud/Vidcloud embed URLs natively inside Kodi. Other add-ons can configure their solver URL to use this local service.</description>
             <assets>
                 <icon>icon.png</icon>
+            </assets>
+        </extension>
+    </addon>
+    <addon id="service.otaku.rpdev" version="1.0.0" name="Otaku RPDev Background Service" provider-name="RPDev">
+        <requires>
+            <import addon="xbmc.python" version="3.0.1" />
+            <import addon="script.module.beautifulsoup4" />
+            <import addon="script.module.soupsieve" optional="true" />
+            <import addon="script.module.web-pdb" optional="true" />
+            <import addon="script.module.inputstreamhelper" optional="true" />
+            <import addon="script.module.pyqrcode" />
+        </requires>
+        <extension point="xbmc.service" library="service.py" />
+        <extension point="xbmc.python.module" library="resources/lib" />
+        <extension point="xbmc.addon.metadata">
+            <summary lang="en">Background maintenance, database sync, and service settings for Otaku RPDev</summary>
+            <description lang="en">Persistent background OAuth refresh, offline mappings/metadata sync, multipage pre-caching, cache/SQLite PRAGMA tuning, solvers, network settings, and diagnostics for Otaku RPDev.</description>
+            <platform>all</platform>
+            <reuselanguageinvoker>false</reuselanguageinvoker>
+            <license>GPL-3.0</license>
+            <assets>
+                <icon>icon.png</icon>
+                <fanart>fanart.jpg</fanart>
+                <clearlogo>logo.png</clearlogo>
+                <poster>poster.png</poster>
             </assets>
         </extension>
     </addon>
