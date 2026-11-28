@@ -1,7 +1,20 @@
 ========================
+[B]OTAKU RPDEV v6.9.7[/B]
+Docs & Quad-Addon Parity
+========================
+
+v6.9.7 Highlights:
+  * Comprehensive Documentation Sync: Updated README.md, user
+    configuration guide (10+3+2 settings split), architecture,
+    algorithms, scrapers, routing, and testing docs for the
+    quad-addon v6.9.7 suite.
+  * Quad-Addon Tooling Parity: Added service.otaku.rpdev to
+    coverage config and live ONN log version auditing.
+
+--------------------------------
 [B]OTAKU RPDEV v6.9.6[/B]
 EOF Seek & Leak Fix
-========================
+--------------------------------
 
 v6.9.6 Highlights:
   * EOF Seek & Thread-Leak Fix: Guarded intro/outro auto-skip seeks

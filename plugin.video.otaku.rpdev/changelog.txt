@@ -1,3 +1,8 @@
+Changelog v6.9.7 (2026-11-28):
+- Comprehensive Quad-Addon Documentation Sync & Tooling Parity:
+  - Updated `README.md`, `AGENTS.md`, `CHANGEREPORT.md`, all `docs/*.md`, `docs/teamwork/*.md`, and all 4 `.agents/skills/*/SKILL.md` runbooks to verified `v6.9.7` quad-addon ground truth (`plugin.video.otaku.rpdev v6.9.7`, `service.otaku.rpdev v1.2.1`, `service.subtitles.otaku.rpdev v1.1.1`, `context.otaku.rpdev v1.0.50`, 15-category / 521-setting split, 42 1080i skin XMLs, 8 subtitle providers, `SCHEMA_VERSION = '1.0.17'`, and `v6.3.6`–`v6.9.7` milestones).
+  - Added `service.otaku.rpdev` to `pyproject.toml` `[tool.coverage.run].source` and `scripts/audit_onn_logs.py` `ADDON_VERSION_RE` for complete quad-addon coverage and live log version tracking.
+
 Changelog v6.9.6 (2026-11-27):
 - EOF Seek RuntimeError Guard & Binge Next-Episode Parity:
   - Added `WatchlistPlayer._safe_seek_time()` in `player.py` to check active playback and catch `RuntimeError: Kodi is not playing any media file` across intro/outro auto-skip seeks in `_run_unified_episode_monitor()`, preventing aborted `keepAlive()` cleanup and `CPythonInvoker` thread leaks.
